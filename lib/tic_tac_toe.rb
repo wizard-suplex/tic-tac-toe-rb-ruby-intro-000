@@ -1,3 +1,15 @@
+# LITTLE HELPERS
+# Make user input play nicely with the program
+def input_to_index(user_input)
+  user_input.to_i - 1
+end
+
+# Check that a space is open for a move
+def position_taken?(board, index)
+  !(board[index].nil? || board[index] == " ")
+end
+
+
 # DISPLAY
 # Display the current board state
 def display_board(board)
@@ -23,11 +35,6 @@ end
 # Set current player based on turn_count
 def current_player(board)
   turn_count(board) % 2 == 0 ? "X" : "O"
-end
-
-# Check that space is open for a move
-def position_taken?(board, index)
-  !(board[index].nil? || board[index] == " ")
 end
 
 # See if the move is valis
