@@ -9,6 +9,11 @@ def position_taken?(board, index)
   !(board[index].nil? || board[index] == " ")
 end
 
+# Do the Locomotion
+def move(board, index, player)
+  board[index] = player
+end
+
 # DISPLAY
 # Display the current board state
 def display_board(board)
@@ -37,8 +42,16 @@ def current_player(board)
 end
 
 # Make your move
-def move(board, index, player)
-  board[index] = player
+def turn(board)
+  puts 'Please enter 1-9:'
+  user_input = gets.strip
+  index = input_to_index(user_input)
+  if valid_move?(board, index)
+    move(board, index, current_player(board))
+    display_board(board)
+  else
+    turn(board)
+  end
 end
 
 # See if the move is valis
