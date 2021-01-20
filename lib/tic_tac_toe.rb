@@ -1,8 +1,15 @@
-# Helpers
-def position_taken?(board, index)
-  !(board[index].nil? || board[index] == " ")
+# DISPLAY
+# Display the current board state
+def display_board(board)
+  puts " #{board[0]} | #{board[1]} | #{board[2]} "
+  puts '-----------'
+  puts " #{board[3]} | #{board[4]} | #{board[5]} "
+  puts '-----------'
+  puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
 
+# GAMEPLAY
+# Count turns
 def turn_count(board)
   turn_number = 0
   board.each do |move|
@@ -13,11 +20,27 @@ def turn_count(board)
   return turn_number
 end
 
+# Set current player based on turn_count
 def current_player(board)
   turn_count(board) % 2 == 0 ? "X" : "O"
 end
 
-# Define your WIN_COMBINATIONS constant
+# Check that space is open for a move
+def position_taken?(board, index)
+  !(board[index].nil? || board[index] == " ")
+end
+
+# See if the move is valis
+def valid_move?(board, index)
+  index.between?(0, 8) && !position_taken?(board, index)
+end
+
+# Determine if the board has been filled
+def full?(board)
+  board.all?{|token| token == "X" || token == "O"}
+end
+
+# What counts as a win?
 WIN_COMBINATIONS = [
   [0, 1, 2], # top row
   [3, 4, 5], # center row
@@ -36,11 +59,6 @@ def won?(board)
    board[win[0]] == board[win[2]] &&
    position_taken?(board, win[0])
  end
-end
-
-# Determine if the board has been filled
-def full?(board)
-  board.all?{|token| token == "X" || token == "O"}
 end
 
 # Determine that there has been a draw
