@@ -9,7 +9,6 @@ def position_taken?(board, index)
   !(board[index].nil? || board[index] == " ")
 end
 
-
 # DISPLAY
 # Display the current board state
 def display_board(board)
